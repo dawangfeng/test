@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.categorychildMapper" >
+  <resultMap id="BaseResultMap" type="com.model.categorychild" >
+    <id column="categorychildid" property="categorychildid" jdbcType="INTEGER" />
+    <result column="categoryid" property="categoryid" jdbcType="INTEGER" />
+    <result column="categorychildname" property="categorychildname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    categorychildid, categoryid, categorychildname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from categorychild
+    where categorychildid = #{categorychildid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from categorychild
+    where categorychildid = #{categorychildid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.categorychild" >
+    insert into categorychild (categorychildid, categoryid, categorychildname
+      )
+    values (#{categorychildid,jdbcType=INTEGER}, #{categoryid,jdbcType=INTEGER}, #{categorychildname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.categorychild" >
+    insert into categorychild
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="categorychildid != null" >
+        categorychildid,
+      </if>
+      <if test="categoryid != null" >
+        categoryid,
+      </if>
+      <if test="categorychildname != null" >
+        categorychildname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="categorychildid != null" >
+        #{categorychildid,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="categorychildname != null" >
+        #{categorychildname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.categorychild" >
+    update categorychild
+    <set >
+      <if test="categoryid != null" >
+        categoryid = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="categorychildname != null" >
+        categorychildname = #{categorychildname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where categorychildid = #{categorychildid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.categorychild" >
+    update categorychild
+    set categoryid = #{categoryid,jdbcType=INTEGER},
+      categorychildname = #{categorychildname,jdbcType=VARCHAR}
+    where categorychildid = #{categorychildid,jdbcType=INTEGER}
+  </update>
+</mapper>

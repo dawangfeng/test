@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.xinxiMapper" >
+  <resultMap id="BaseResultMap" type="com.model.xinxi" >
+    <id column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="crtegorychildid" property="crtegorychildid" jdbcType="VARCHAR" />
+    <result column="goodsrenderingimg" property="goodsrenderingimg" jdbcType="VARCHAR" />
+    <result column="goodstemplateimg" property="goodstemplateimg" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="goodsno" property="goodsno" jdbcType="VARCHAR" />
+    <result column="goodsapply" property="goodsapply" jdbcType="VARCHAR" />
+    <result column="specifications" property="specifications" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+     <association property="categorychild" javaType="com.model.categorychild">   
+            <id property="categorychildid" column="categorychildid"/>
+            <id property="categoryid" column="categoryid"/>
+            <result property="categorychildname" column="categorychildname"/>
+        </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodsid, crtegorychildid, goodsrenderingimg, goodstemplateimg, description, goodsno, 
+    goodsapply, specifications, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from xinxi a inner join categorychild b on a.crtegorychildid=b.categorychildid and a.goodsid = #{goodsid,jdbcType=INTEGER}
+  </select>
+  <select id="selectbychicui" resultMap="BaseResultMap" parameterType="com.util.Constants">
+  	select * from xinxi a where a.crtegorychildid=#{pd.lieid}
+  	<if test="pd.chicui != null and pd.chicui != ''">
+  		and a.specifications=#{pd.chicui}
+  	</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xinxi
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.xinxi" >
+    insert into xinxi (goodsid, crtegorychildid, goodsrenderingimg, 
+      goodstemplateimg, description, goodsno, 
+      goodsapply, specifications, createtime
+      )
+    values (#{goodsid,jdbcType=INTEGER}, #{crtegorychildid,jdbcType=VARCHAR}, #{goodsrenderingimg,jdbcType=VARCHAR}, 
+      #{goodstemplateimg,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{goodsno,jdbcType=VARCHAR}, 
+      #{goodsapply,jdbcType=VARCHAR}, #{specifications,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.xinxi" >
+    insert into xinxi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        goodsid,
+      </if>
+      <if test="crtegorychildid != null" >
+        crtegorychildid,
+      </if>
+      <if test="goodsrenderingimg != null" >
+        goodsrenderingimg,
+      </if>
+      <if test="goodstemplateimg != null" >
+        goodstemplateimg,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="goodsno != null" >
+        goodsno,
+      </if>
+      <if test="goodsapply != null" >
+        goodsapply,
+      </if>
+      <if test="specifications != null" >
+        specifications,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="crtegorychildid != null" >
+        #{crtegorychildid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsrenderingimg != null" >
+        #{goodsrenderingimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstemplateimg != null" >
+        #{goodstemplateimg,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsapply != null" >
+        #{goodsapply,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.xinxi" >
+    update xinxi
+    <set >
+      <if test="crtegorychildid != null" >
+        crtegorychildid = #{crtegorychildid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsrenderingimg != null" >
+        goodsrenderingimg = #{goodsrenderingimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstemplateimg != null" >
+        goodstemplateimg = #{goodstemplateimg,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        goodsno = #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsapply != null" >
+        goodsapply = #{goodsapply,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        specifications = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.xinxi" >
+    update xinxi
+    set crtegorychildid = #{crtegorychildid,jdbcType=VARCHAR},
+      goodsrenderingimg = #{goodsrenderingimg,jdbcType=VARCHAR},
+      goodstemplateimg = #{goodstemplateimg,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      goodsno = #{goodsno,jdbcType=VARCHAR},
+      goodsapply = #{goodsapply,jdbcType=VARCHAR},
+      specifications = #{specifications,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR}
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <select id="selectlistPage" resultMap="BaseResultMap" parameterType="com.util.Page">
+  	select * from xinxi a inner join categorychild b on a.crtegorychildid=b.categorychildid
+  	<if test="pd.liebieid != null and pd.liebieid != ''">
+  		and b.categorychildid=#{pd.liebieid} and a.specifications=#{pd.chicui}
+  	</if>
+  	<if test="pd.dalieid != null and pd.dalieid != ''">
+  		and b.categoryid=#{pd.dalieid}
+  	</if>
+  </select>
+</mapper>

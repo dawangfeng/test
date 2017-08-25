@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.cartMapper" >
+  <resultMap id="BaseResultMap" type="com.model.cart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="crtegorychildid" property="crtegorychildid" jdbcType="INTEGER" />
+    <result column="goodsrenderingimg" property="goodsrenderingimg" jdbcType="VARCHAR" />
+    <result column="goodstemplateimg" property="goodstemplateimg" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="goodsno" property="goodsno" jdbcType="VARCHAR" />
+    <result column="goodsapply" property="goodsapply" jdbcType="VARCHAR" />
+    <result column="specifications" property="specifications" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, crtegorychildid, goodsrenderingimg, goodstemplateimg, description, goodsno, goodsapply, 
+    specifications, number, createtime, userid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.cart" >
+    insert into cart (id, crtegorychildid, goodsrenderingimg, 
+      goodstemplateimg, description, goodsno, 
+      goodsapply, specifications, number, 
+      createtime, userid)
+    values (#{id,jdbcType=INTEGER}, #{crtegorychildid,jdbcType=INTEGER}, #{goodsrenderingimg,jdbcType=VARCHAR}, 
+      #{goodstemplateimg,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{goodsno,jdbcType=VARCHAR}, 
+      #{goodsapply,jdbcType=VARCHAR}, #{specifications,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="crtegorychildid != null" >
+        crtegorychildid,
+      </if>
+      <if test="goodsrenderingimg != null" >
+        goodsrenderingimg,
+      </if>
+      <if test="goodstemplateimg != null" >
+        goodstemplateimg,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="goodsno != null" >
+        goodsno,
+      </if>
+      <if test="goodsapply != null" >
+        goodsapply,
+      </if>
+      <if test="specifications != null" >
+        specifications,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="crtegorychildid != null" >
+        #{crtegorychildid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsrenderingimg != null" >
+        #{goodsrenderingimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstemplateimg != null" >
+        #{goodstemplateimg,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsapply != null" >
+        #{goodsapply,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.cart" >
+    update cart
+    <set >
+      <if test="crtegorychildid != null" >
+        crtegorychildid = #{crtegorychildid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsrenderingimg != null" >
+        goodsrenderingimg = #{goodsrenderingimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstemplateimg != null" >
+        goodstemplateimg = #{goodstemplateimg,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        goodsno = #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsapply != null" >
+        goodsapply = #{goodsapply,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        specifications = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.cart" >
+    update cart
+    set crtegorychildid = #{crtegorychildid,jdbcType=INTEGER},
+      goodsrenderingimg = #{goodsrenderingimg,jdbcType=VARCHAR},
+      goodstemplateimg = #{goodstemplateimg,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      goodsno = #{goodsno,jdbcType=VARCHAR},
+      goodsapply = #{goodsapply,jdbcType=VARCHAR},
+      specifications = #{specifications,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectcartlistPage" resultMap="BaseResultMap" parameterType="com.util.Page">
+  	select * from cart where userid=#{pd.userid,jdbcType=INTEGER} order by createtime desc
+  </select>
+  <select id="selectbycount" resultType="java.lang.Integer"  parameterType="java.lang.Integer">
+  	select count(*) from cart where userid=#{userid,jdbcType=INTEGER}
+  </select>
+</mapper>
